@@ -1,5 +1,9 @@
+import { game } from './game.js';
+import { board } from './Board/board.js';
+import { boardInformation } from './Board/information.js';
 
-let computer = (function(){
+
+export let computer = (function(){
 
     let _chooseRandomItem = function(array){
         return array[Math.floor(Math.random() * array.length)];

@@ -1,5 +1,5 @@
 
-let player = () => {
+export let player = () => {
     let _id;
     let _name;
     let _color;

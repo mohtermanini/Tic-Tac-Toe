@@ -1,4 +1,8 @@
-let game = (function(){
+import { player } from './player.js';
+import { computer } from './computer.js';
+import { board } from './Board/board.js';
+
+export let game = (function(){
             
     const _players = [];
     let _currentPlayerIndex;

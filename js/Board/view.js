@@ -1,6 +1,6 @@
+import { game } from '../game.js';
 
-
-let boardView = (function(){
+export let boardView = (function(){
 
     let editCellContent = (rowId, columnId, content) => {
         let cell = document.querySelector(`.ttc-cell[data-row="${rowId}"][data-column="${columnId}"]`); 

@@ -1,6 +1,6 @@
+import { game } from '../game.js';
 
-
-let boardInformation = (function(){
+export let boardInformation = (function(){
 
     let checkBoardFull = function(board){
         let n = board.length;
@@ -190,3 +190,4 @@ let boardInformation = (function(){
     }
     
 })();
+

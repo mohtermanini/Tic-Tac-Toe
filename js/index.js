@@ -1,5 +1,8 @@
 
- window.addEventListener("DOMContentLoaded", () => {
+
+import { game } from './game.js';
+
+window.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".form-grid-size").addEventListener("submit", (e) => {
         e.preventDefault();
         e.target.querySelector(".submit-group").classList.add("v-hidden");
@@ -41,3 +44,6 @@
 
     game.init();
  })
+
+
+

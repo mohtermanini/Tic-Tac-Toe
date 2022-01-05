@@ -1,5 +1,8 @@
+import { game } from '../game.js';
+import { boardInformation } from './information.js';
+import { boardView } from './view.js';
 
-let board = (function(doc){
+export let board = (function(doc){
     let _n;
     const _moves = [];
     let _boardElement;
