@@ -2,6 +2,7 @@ let game = (function(){
             
     const _players = [];
     let _currentPlayerIndex;
+    let _board;
     
     let init = function(){
         createPlayer("Player1", "red", "X", "human");
@@ -19,7 +20,7 @@ let game = (function(){
         _clearResults();
         board.clearBoard();
         board.setBoardElement(document.querySelector(".ttc-grid"));
-        board.createBoard(gridSize);
+        _board = board.createBoard(gridSize);
         if(secondIsComputer && getPlayerByIndex(1).getType() !== "computer"){
             _players.splice(1, 1);
             createPlayer("Computer", "blue", "O", "computer");
@@ -73,13 +74,13 @@ let game = (function(){
         _changeTurnLabel(newPlayerIndex, "(Your Turn)");
 
         if(getCurrentPlayer().getType() === "computer"){
+            let chosenCell;
             if(board.getBoardSize() == 3){
-                let chosenCell  = computer.playHardMove(null, oldPlayerIndex, newPlayerIndex);
-                board.cellPlay(chosenCell.row, chosenCell.col);
+                chosenCell  = computer.getHardAIMove(null, oldPlayerIndex, newPlayerIndex);
             }else{
-                computer.playEazyMove();
+                chosenCell = computer.getEazyAIMove(_board);
             }
-            
+            board.cellPlay(chosenCell.row, chosenCell.col);
         }
     }
 
@@ -97,10 +98,6 @@ let game = (function(){
             resultLabelContainer.textContent = "";
             resultLabelContainer.classList.remove("announced");
         });
-    }
-
-    let _clearPlayers = function(){
-        _players.length = 0;
     }
    
     let getPlayersNum = function(){
