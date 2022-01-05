@@ -12,7 +12,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   font-family: "Fira-sans", Verdana, sans-serif;
-  background-image: url(../img/background-high.jpg);
+  background-image: url(../img/background-high-resized.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   color: #fff;
