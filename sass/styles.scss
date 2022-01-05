@@ -1,0 +1,173 @@
+
+
+
+@import url(../css/reset.css);
+
+@import "./general";
+@import "./buttons";
+
+@font-face{
+    font-family: "Fira-sans";
+    src: url("../FiraSans-Heavy.otf");
+}
+
+.ttc-grid{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    > div{
+        display: grid;
+        border-bottom: 3px solid #fff;
+        &:last-child{
+           border-bottom: none;
+        }
+      > .ttc-cell{
+        user-select: none;
+        border-right: 3px solid #fff;
+        min-width: 75px;
+        min-height: 75px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3rem;
+        &:last-child{
+            border-right: none;
+        }
+        &:hover{
+            background-color: rgba(0,0,0,0.25);
+            cursor: pointer;
+        }
+      }
+    }
+}
+
+
+.form-grid-size{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; 
+    align-items: center;
+    .grid-size-container{
+        display: flex;
+        gap: 1rem;
+    }
+    input[type=radio]{
+        display: none;
+    }
+    input[type=checkbox]{
+        display: none;
+    }
+    label{
+        @extend .btn;
+        background-color: transparent;
+        border: 1px solid orange;
+    }
+    label.selected{
+        outline: 3px solid orange;
+        background-color: rgba(0,0,0,0.5);
+    }
+    .submit-group{
+        display: flex;
+        gap: 1rem;
+    }
+    button[type=submit]{
+        @extend .btn;
+        @include btn-outline;
+    }
+}
+
+.main-grid{
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    .play-area{
+        grid-column-start: 2;
+    }
+    #player-1-area{
+        grid-column-start: 1;
+        grid-row-start: 1;
+    }
+    #player-2-area{
+        grid-column-start: 3;
+        grid-row-start: 1;
+    }
+    .player-area{
+        padding: 0 1rem;
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        align-items: center;
+        justify-content: stretch;
+        text-align: center;
+        overflow: hidden;
+        .btn-change-name{
+            @extend .btn;
+            @include btn-outline;
+
+        }
+        form{
+            display: none;
+            //display: flex;    should be toggled by change name button
+            justify-self: start;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;    
+            .name-group{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            .submit-group{
+                button[type=submit]{
+                    @extend .btn;
+                    @include btn-outline;
+                    padding: 0.5rem 1.25rem;
+                }
+            }
+        }
+        .player-name{
+            font-size: 2.5rem;
+            color: wheat;
+            max-height: 15rem;
+            overflow: hidden;
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            align-items: center;
+            .turn-label{
+                font-size: 1rem;
+                color: #fff;
+            }
+        }
+        .result{
+            font-size: 2rem;
+            .result-label{
+                color: orange;
+                padding: 1rem 2rem;
+                border-radius: 50%;
+            }
+            .announced{
+                border: 3px solid #000;
+            }
+        }
+    }
+}
+
+
+.spacer-md{
+    margin-top: 3rem;
+}
+.spacer-sm{
+    margin-top: 2rem;
+}
+.spacer-xs{
+    margin-top: 1rem;
+}
+.d-none{
+    display: none;
+}
+.v-hidden{
+    visibility: hidden;
+}
+
+
