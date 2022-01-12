@@ -16,6 +16,9 @@ body{
     background-repeat: no-repeat;
     background-size: cover; 
     color: #fff;
+    &.active-modal{
+        overflow:hidden;
+    }
 }
 label{
     cursor: pointer;
@@ -30,8 +33,16 @@ input{
     border-bottom: 2px solid #fff;
     color: #fff;
     padding-right: 0.25rem;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     &:focus{
         border-bottom-color: orange;
     }
+    &::placeholder{
+        color: rgba(219, 219, 219, 0.4);
+    }
+}
+
+h2{
+    font-size: 2.25rem;
+    font-weight: 700;
 }

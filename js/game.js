@@ -4,14 +4,9 @@ import { board } from './Board/board.js';
 
 export let game = (function(){
             
-    const _players = [];
+    let _players = [];
     let _currentPlayerIndex;
     let _board;
-    
-    let init = function(){
-        createPlayer("Player1", "red", "X", "human");
-        createPlayer("Player2", "blue", "O", "human");
-    }
     
     let createPlayer = function(name, color, playSymbol, type){
         let newPlayer = player();
@@ -19,26 +14,43 @@ export let game = (function(){
         _players.push(newPlayer);
     }
 
+    let _createPlayers = function(secondType, playersNames){
+        if(secondType=="computer"){
+            createPlayer(playersNames[0], "red", "X", "human");
+            createPlayer("Computer", "blue", "O", "computer");
+        }else if(secondType == "human"){
+            createPlayer(playersNames[0], "red", "X", "human");
+            createPlayer(playersNames[1], "blue", "O", "human");
+        }
+    }
    
-    let start = function(gridSize, secondIsComputer){
+    let createGame = function(gridSize, secondType, playersNames){
+        _clearGame();
+        _clearPlayers();
+        _createPlayers(secondType, playersNames);
+        _launch(gridSize);
+    }
+
+    let _clearGame = function(){
         _clearResults();
         board.clearBoard();
         board.setBoardElement(document.querySelector(".ttc-grid"));
+    }
+
+    let _launch = function(gridSize){
         _board = board.createBoard(gridSize);
-        if(secondIsComputer && getPlayerByIndex(1).getType() !== "computer"){
-            _players.splice(1, 1);
-            createPlayer("Computer", "blue", "O", "computer");
-        }else if(!secondIsComputer && getPlayerByIndex(1).getType() !== "human"){
-            _players.splice(1, 1);
-            createPlayer("Player2", "blue", "O", "human");
-        }
-        
         _currentPlayerIndex = 0;
         changeTurn(0);
     }
 
+  
+
+    let restart = function(){
+        _clearGame();
+        _launch(board.getBoardSize());
+    }
+
     let end = function(){
-        document.querySelector(".form-grid-size .submit-group").classList.remove("v-hidden");
         _currentPlayerIndex = -1;
         _clearTurnLabels();
     }
@@ -96,6 +108,10 @@ export let game = (function(){
         _changeTurnLabel(0,"");
     }
 
+    let _clearPlayers = function(){
+        _players = [];
+    }
+
     let _clearResults = function(winnerIndex){
         document.querySelectorAll(".player-area").forEach( item => {
             let resultLabelContainer = item.querySelector(".result .result-label");
@@ -109,9 +125,9 @@ export let game = (function(){
     }
 
     return {
-        init,
         createPlayer,
-        start,
+        createGame,
+        restart,
         end,
         getCurrentPlayer,
         getCurrentPlayerIndex,
