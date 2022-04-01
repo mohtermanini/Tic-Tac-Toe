@@ -3,3 +3,21 @@
 .d-none{
     display: none !important;
 }
+
+.mh-0 {
+    max-height: 0;
+}
+
+.p-0 {
+    padding: 0 !important;
+}
+
+.bd-0{
+    border: 0 !important;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
