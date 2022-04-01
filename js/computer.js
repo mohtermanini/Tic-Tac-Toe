@@ -23,12 +23,9 @@ export let computer = (function () {
         return chosenCell;
     };
 
-    let getHardAIMove = function (previousMove, previousPlayerIndex, originalPlayerIndex) {
-        let dp = new Map();
-        return getHardAIMoveDP(previousMove, previousPlayerIndex, originalPlayerIndex, dp);
-    }
+    let dp = new Map();
 
-    let getHardAIMoveDP = function (previousMove, previousPlayerIndex, originalPlayerIndex, dp) {
+    let getHardAIMove = function (previousMove, previousPlayerIndex, originalPlayerIndex) {
         const currentBoard = board.getBoard();
         if (
             boardInformation.checkWin(
@@ -65,7 +62,7 @@ export let computer = (function () {
                         game.getPlayerByIndex(playerIndex).getPlaySymbol(),
                     );
                     let move = { row: i, col: j };
-                    let curr = getHardAIMoveDP(move, playerIndex, originalPlayerIndex, dp);
+                    let curr = getHardAIMove(move, playerIndex, originalPlayerIndex);
                     board.setCell(currentBoard, i, j, null);
                     if (
                         (playerIndex !== originalPlayerIndex && bestMove["res"] > curr["res"]) ||
