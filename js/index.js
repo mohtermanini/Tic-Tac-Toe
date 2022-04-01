@@ -19,7 +19,7 @@ window.addEventListener("DOMContentLoaded", () => {
         });
         document.querySelectorAll('input[name="difficulty"]').forEach((item) => {
             item.addEventListener("change", labelChange);
-            item.addEventListener("change", difficultyChange);
+            item.addEventListener("change", renderDifficulty);
         });
         gameOptionsForm.addEventListener("submit", startNewGame);
         document.querySelector(".btn-new-game").addEventListener("click", () => {
@@ -38,14 +38,7 @@ window.addEventListener("DOMContentLoaded", () => {
     function gridSizeChange(e) {
         const newSize = parseInt(e.target.value, 10);
         numberToPlaceSpan.textContent = boardInformation.getConsecutiveSymbolNumberToWin(newSize);
-        if (gameOptionsForm["computerOrHuman"].value === "human") {
-            return;
-        }
-        if (newSize === 5) {
-            disableHardDifficulty();
-        } else {
-            enableHardDifficulty();
-        }
+        renderDifficulty();
     }
     /* ==================== */
 
@@ -54,12 +47,11 @@ window.addEventListener("DOMContentLoaded", () => {
         const type = e.target.value;
         if (type === "computer") {
             player2InputContainer.style["max-height"] = "0";
-            showDifficultyOptions();
         } else {
             player2InputContainer.style["max-height"] = `${player2InputContainer.scrollHeight}px`;
-            hideDifficultyOptions();
         }
         player2InputContainer.classList.remove("mh-0");
+        renderDifficulty();
     }
     /* ==================== */
 
@@ -93,12 +85,10 @@ window.addEventListener("DOMContentLoaded", () => {
         easyDifficultyLabel.classList.add("selected");
         hardDifficultyLabel.classList.remove("selected");
         hardDifficultyLabel.classList.add("disabled");
-        difficultyChange();
     }
 
     function enableHardDifficulty() {
         hardDifficultyLabel.classList.remove("disabled");
-        difficultyChange();
     }
 
     function showHardDifficultyInfo() {
@@ -109,13 +99,27 @@ window.addEventListener("DOMContentLoaded", () => {
         difficultyInfo.textContent = "";
     }
 
-    function difficultyChange() {
+    function renderDifficultyInfo() {
         const gridSize = parseInt(gameOptionsForm["grid-size"].value, 10);
         if (easyDifficultyInput.checked || gridSize === 3) {
             hideDifficultyInfo();
         } else {
             showHardDifficultyInfo();
         }
+    }
+
+    function renderDifficulty() {
+        if (gameOptionsForm["computerOrHuman"].value === "human") {
+            hideDifficultyOptions();
+            return;
+        }
+        const gridSize = parseInt(gameOptionsForm["grid-size"].value, 10);
+        if (gridSize === 5) {
+            disableHardDifficulty();
+        } else {
+            enableHardDifficulty();
+        }
+        renderDifficultyInfo();
         showDifficultyOptions();
     }
     /* ==================== */
