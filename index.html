@@ -1,115 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic Tac Toe</title>
-    <link rel="icon" href="./favicon.png">
-    <link rel="stylesheet" href="./css/styles.css">
-</head>
-<body>
-    <div class="spacer-md"></div>
-    <div class="main-grid">
-        <div class="play-area">
-            <div class="boot-options">
-                <button class="btn-new-game">New game</button>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tic Tac Toe</title>
+        <link rel="icon" href="./favicon.png" />
+        <link rel="stylesheet" href="./css/styles.css" />
+    </head>
+    <body>
+        <div class="spacer-md"></div>
+        <div class="main-grid">
+            <div class="play-area">
+                <div class="boot-options">
+                    <button class="btn-new-game">New game</button>
+                </div>
+                <div class="spacer-md"></div>
+                <div class="ttc-grid-container">
+                    <div class="ttc-grid"></div>
+                </div>
+                <div class="spacer-md"></div>
+                <div class="boot-options">
+                    <button class="btn-restart-game">Restart</button>
+                </div>
             </div>
-            <div class="spacer-md"></div>
-            <div class="ttc-grid-container">
-                <div class="ttc-grid"></div>
+            <div id="player-1-area" class="player-area" data-player="0">
+                <div id="player-1-name" class="player-name">
+                    <p class="name-label">Player1</p>
+                    <p class="turn-label"></p>
+                </div>
+                <div class="result">
+                    <span class="result-label"></span>
+                </div>
             </div>
-            <div class="spacer-md"></div>
-            <div class="boot-options">
-                <button class="btn-restart-game">Restart</button>
+            <div id="player-2-area" class="player-area" data-player="1">
+                <div id="player-2-name" class="player-name">
+                    <p class="name-label">Player2</p>
+                    <p class="turn-label"></p>
+                </div>
+                <div class="result">
+                    <span class="result-label"></span>
+                </div>
             </div>
         </div>
-        <div id="player-1-area" class="player-area" data-player="0">
-            <div id="player-1-name" class="player-name">
-                <p class="name-label">Player1</p>
-                <p class="turn-label"></p>
-            </div>
-            <div class="result">
-                <span class="result-label"></span>
-            </div>
-        </div>
-        <div id="player-2-area" class="player-area" data-player="1">
-            <div id="player-2-name" class="player-name">
-                <p class="name-label">Player2</p>
-                <p class="turn-label"></p>
-            </div>
-            <div class="result">
-                <span class="result-label"></span>
-            </div>
-        </div>
-    </div>
-    <div id="modal-game-options" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Tic-Tac-Toe</h2>
-            </div>
-            <div class="modal-body">
-                <form id="form-game-options"></form>
-                <div class="option">
-                    <p>Grid size</p>
-                    <div class="row-options">
-                        <label for="size-3" class="selected">
-                            <input form="form-game-options" type="radio" id="size-3" name="grid-size" value="3" checked="checked">
-                            <span>3*3</span>
-                        </label>
-                        <label for="size-4">
-                            <input form="form-game-options" type="radio" id="size-4" name="grid-size" value="4">
-                            <span>4*4</span>
-                        </label>
-                        <label for="size-5">
-                            <input form="form-game-options" type="radio" id="size-5" name="grid-size" value="5">
-                            <span>5*5</span>
-                        </label>
+        <div id="modal-game-options" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Tic-Tac-Toe</h2>
+                </div>
+                <div class="modal-body">
+                    <form id="form-game-options"></form>
+                    <div class="option grid-size">
+                        <p>Grid size</p>
+                        <div class="options-with-info-container">
+                            <div class="grid-size-options">
+                                <label for="size-3" class="selected">
+                                    <input
+                                        form="form-game-options"
+                                        type="radio"
+                                        id="size-3"
+                                        name="grid-size"
+                                        value="3"
+                                        checked="checked"
+                                    />
+                                    <span>3*3</span>
+                                </label>
+                                <label for="size-4">
+                                    <input
+                                        form="form-game-options"
+                                        type="radio"
+                                        id="size-4"
+                                        name="grid-size"
+                                        value="4"
+                                    />
+                                    <span>4*4</span>
+                                </label>
+                                <label for="size-5">
+                                    <input
+                                        form="form-game-options"
+                                        type="radio"
+                                        id="size-5"
+                                        name="grid-size"
+                                        value="5"
+                                    />
+                                    <span>5*5</span>
+                                </label>
+                            </div>
+                            <div class="info-container">
+                                <p class="info">
+                                    The first to place
+                                    <span class="size-info">3</span>
+                                    same consecutive symbols Wins
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="option column-option">
-                   <p>Play against</p>
-                   <div class="row-options">
-                    <label for="type-computer" class="selected">
-                        <input form="form-game-options" type="radio" id="type-computer" 
-                                name="computerOrHuman" value="computer" checked>
-                        <span>Computer</span>
-                    </label>
-                    <label for="type-human">
-                        <input form="form-game-options" type="radio" id="type-human" 
-                                name="computerOrHuman" value="human">
-                        <span>Human</span>
-                    </label>
-                </div>
-            </div>
-            <div class="option column-option">
-                <p>Players</p>
-                <div class="column-container">
-                    <div class="name-input-container">
-                        <p>Player1</p>
-                        <input form="form-game-options" type="text" name="player1-name" id="player1-name" 
-                        autocomplete="off"
-                        value="Player1" placeholder="Enter your name" required>
+                    <div class="option column-option">
+                        <p>Play against</p>
+                        <div class="game-type-options">
+                            <label for="type-computer" class="selected">
+                                <input
+                                    form="form-game-options"
+                                    type="radio"
+                                    id="type-computer"
+                                    name="computerOrHuman"
+                                    value="computer"
+                                    checked
+                                />
+                                <span>Computer</span>
+                            </label>
+                            <label for="type-human">
+                                <input
+                                    form="form-game-options"
+                                    type="radio"
+                                    id="type-human"
+                                    name="computerOrHuman"
+                                    value="human"
+                                />
+                                <span>Human</span>
+                            </label>
+                        </div>
                     </div>
-                    <div class="name-input-container">
-                        <p>Player2</p>
-                        <input form="form-game-options" type="text" name="player2-name" id="player2-name"
-                                 autocomplete="off" 
-                                value="Player2" placeholder="Enter your name" required>
+                    <div class="option difficulty-option">
+                        <p>Difficulty</p>
+                        <div class="options-with-info-container">
+                            <div class="difficulty-options">
+                                <label for="difficulty-easy" class="label-difficulty-easy selected">
+                                    <input
+                                        form="form-game-options"
+                                        type="radio"
+                                        id="difficulty-easy"
+                                        name="difficulty"
+                                        value="easy"
+                                        checked
+                                    />
+                                    <span>Easy</span>
+                                </label>
+                                <label for="difficulty-hard" class="label-difficulty-hard">
+                                    <input
+                                        form="form-game-options"
+                                        type="radio"
+                                        id="difficulty-hard"
+                                        name="difficulty"
+                                        value="hard"
+                                    />
+                                    <span>Hard</span>
+                                </label>
+                            </div>
+                            <div class="info-container difficulty-info">
+                                <p class="info">
+                                </p>
+                            </div>
+                        </div>
                     </div>
+                    <div class="option column-option">
+                        <p>Players</p>
+                        <div class="column-container">
+                            <div class="name-input-container">
+                                <p>Player1</p>
+                                <input
+                                    form="form-game-options"
+                                    type="text"
+                                    name="player1-name"
+                                    id="player1-name"
+                                    autocomplete="off"
+                                    value="Player1"
+                                    placeholder="Enter your name"
+                                    required
+                                />
+                            </div>
+                            <div class="name-input-container mh-0">
+                                <p>Player2</p>
+                                <input
+                                    form="form-game-options"
+                                    type="text"
+                                    name="player2-name"
+                                    id="player2-name"
+                                    autocomplete="off"
+                                    value="Player2"
+                                    placeholder="Enter your name"
+                                    required
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option submit-options">
+                            <button
+                                type="buton"
+                                class="btn-modal-close"
+                                data-target="#modal-game-options"
+                            >
+                                Close
+                            </button>
+                            <button form="form-game-options" type="submit">Start</button>
+                    </div>
+                    <div class="modal-spacer"></div>
                 </div>
-            </div>
-            <div class="option submit">
-                <div class="row-options">
-                    <button type="buton" class="btn-modal-close" data-target="#modal-game-options">Close</button>
-                    <button form="form-game-options" type="submit">Start</button>
-                </div>
-            </div>
             </div>
         </div>
-    </div>
 
-    <script type="module" src="./js/index.js"></script>
-   
-</body>
+        <script type="module" src="./js/index.js"></script>
+    </body>
 </html>
