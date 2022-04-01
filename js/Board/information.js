@@ -167,12 +167,10 @@ export let boardInformation = (function(){
     }
 
     let getConsecutiveSymbolNumberToWin = function(boardSize){
-        if(boardSize <= 3){
-            return 3;
+        if (boardSize < 5 ) {
+            return boardSize;
         }
-        if(boardSize == 5){
-            return 4;
-        }
+        return 4;
     }
 
     let canSetCell = function(board, row, col){
