@@ -9,6 +9,7 @@ export let game = (function () {
     let _board;
     let _difficulty;
     let _gameExist;
+    let _currentRound;
     let _ttcGrid = document.querySelector(".ttc-grid");
 
     let _setDifficulty = function (difficulty) {
@@ -36,7 +37,6 @@ export let game = (function () {
         _clearPlayers();
         _createPlayers(secondType, playersNames);
         _setDifficulty(difficulty);
-        _gameExist = true;
         _launch(gridSize);
     };
 
@@ -47,8 +47,10 @@ export let game = (function () {
     };
 
     let _launch = function (gridSize) {
+        _gameExist = true;
         _board = board.createBoard(gridSize);
         _currentPlayerIndex = 0;
+        _currentRound = 0;
         changeTurn(0);
     };
 
@@ -93,6 +95,7 @@ export let game = (function () {
     };
 
     let changeTurn = function (increment) {
+        ++_currentRound;
         _changeTurnLabel(_currentPlayerIndex, "");
         let oldPlayerIndex = _currentPlayerIndex;
         let newPlayerIndex = (oldPlayerIndex + increment) % _players.length;
@@ -104,7 +107,7 @@ export let game = (function () {
             if (_difficulty === "easy") {
                 chosenCell = computer.getEazyAIMove(_board);
             } else if (_difficulty === "hard") {
-                if (_board.length === 4) {
+                if (_board.length === 4 && _currentRound <= 2) {
                     _playHeavyComputeMove(oldPlayerIndex, newPlayerIndex);
                     return;
                 } else {
