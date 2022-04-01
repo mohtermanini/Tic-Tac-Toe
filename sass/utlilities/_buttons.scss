@@ -1,0 +1,40 @@
+
+.btn{
+    padding: 0.75rem 2rem;
+    border-radius: 0.25rem;
+    color: #fff;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+@mixin btn-outline($bdc: lime){
+    border: 1px solid $bdc;
+    &:hover{
+        background-color: rgba(0,0,0,0.15);
+    }
+    &:focus{
+        outline: 3px solid $bdc;
+    }
+}
+
+.btn-outline-lime{
+    @extend .btn;
+    @include btn-outline;
+}
+
+.btn-label{
+    @extend .btn;
+    border: 1px solid orange;
+    padding: 0.5rem 1.5rem;
+    &:hover{
+        background-color: rgb(214, 169, 85);
+    }
+    &.selected{
+        outline: 3px solid orange;
+        background-color: rgba(0,0,0,0.5);
+    }
+    &.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+}
