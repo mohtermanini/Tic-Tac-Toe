@@ -19,7 +19,7 @@ export let boardView = (function(){
                 result = "Winner";
             }
             else{
-                result = "Loser";
+                result = "You Lost";
             }
             resultLabelContainer.textContent = result;
             resultLabelContainer.classList.add("announced");
@@ -34,6 +34,7 @@ export let boardView = (function(){
 
     let createRow = function(parent, columnNum){
         let row = document.createElement("div");
+        row.classList.add("row");
         row.style['grid-template-columns'] = `repeat(${columnNum},1fr)`;
         parent.appendChild(row);
         return row;
