@@ -4,8 +4,14 @@
 @import url(../css/reset.css);
 
 @import "./general";
-@import "./buttons";
+
+@import "./utlilities/buttons";
 @import "./utlilities/display";
+@import "./utlilities/loading";
+@import "./utlilities/modals";
+@import "./utlilities/transitions";
+
+@import "./modals/game-options-modal";
 
 @font-face{
     font-family: "Fira-sans";
@@ -14,7 +20,8 @@
 
 .ttc-grid{
     display: grid;
-    > div{
+    position: relative;
+    > .row{
         display: grid;
         border-bottom: 3px solid #fff;
         &:last-child{
@@ -42,9 +49,8 @@
 .ttc-grid-container{
     height: 350px;
     max-width: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @extend .flex-center;
+    position: relative;
 }
 .small-cell{
     min-width: 65px;
@@ -141,91 +147,64 @@
     visibility: hidden;
 }
 
-.modal{
-    position: fixed;
-    z-index: 999;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    backdrop-filter: blur(10px);
-    .modal-content{
-        margin-top: 3rem;
-        .modal-header{
-            padding: 1rem 0;
-            text-align: center;
-            background-image: url(../img/blue.png);
-            border-radius: 0.5rem 0.5rem 0 0;
-        }
-        .modal-body{
-            background-image: url(../img/wood.png);
-            border-radius: 0 0 0.5rem 0.5rem;
-            padding: 1rem 2rem;
-            font-size: 1.75rem;
-            .option{
-                padding: 1rem 0;
-                border-bottom: 1px solid #fff;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                gap: 3rem;
-                &:last-child{
-                    border-bottom: none;
-                    padding-bottom: 0;
-                }
-                .row-options{
-                    display: flex;
-                    gap: 1rem;
-                    input[type=radio]{
-                        display: none;
-                    }
-                    input[type=checkbox]{
-                        display: none;
-                    }
-                    label{
-                        @extend .btn-label;
-                    }
-                    button{
-                        @extend .btn-label;
-                    }
-                }
-                &.column-option{
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1rem;
-                }
-                &.submit{
-                    display: flex;
-                    justify-content: center;
-                }
-            }
-        }
+.option{
+    padding: 1rem 0;
+    border-bottom: 1px solid #fff;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    justify-items: center;
+    align-items: start;
+    gap: 3rem;
+    overflow: hidden;
+    &:last-child{
+        border-bottom: none;
+        padding-bottom: 0;
     }
 }
 
+
+
+.info-container {
+    display: flex;
+    .info {
+        width: 0;
+        flex-grow: 1;
+        font-size: 1rem;;
+        text-align: center;
+        line-height: 1.5;
+        .size-info {
+            color: orange;
+        }
+    }
+}
+.column-option{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+
+.grid-size {
+    // for last radio button label outline
+    padding-right: 0.5rem;
+}
+
+.difficulty-option {
+    @extend .max-height-transition;
+    transition-property: all;
+}
 
 .column-container{
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 1.5rem;
+    overflow: hidden;
     .name-input-container{
         display: flex;
         justify-content: space-between;
-    }
-}
-
-.btn-label{
-    @extend .btn;
-    background-color: transparent;
-    border: 1px solid orange;
-    padding: 0.5rem 1.5rem;
-    &:hover{
-        background-color: rgb(214, 169, 85);
-    }
-    &.selected{
-        outline: 3px solid orange;
-        background-color: rgba(0,0,0,0.5);
+        @extend .max-height-transition;
     }
 }
 

@@ -50,8 +50,15 @@ h2 {
   font-weight: 700;
 }
 
-.btn-outline-lime {
+.btn, .main-grid .player-area .btn-change-name, .boot-options button, .btn-label, .modal label, .modal button, .btn-outline-lime {
+  padding: 0.75rem 2rem;
+  border-radius: 0.25rem;
+  color: #fff;
   background-color: transparent;
+  cursor: pointer;
+}
+
+.btn-outline-lime {
   border: 1px solid lime;
 }
 .btn-outline-lime:hover {
@@ -61,15 +68,124 @@ h2 {
   outline: 3px solid lime;
 }
 
-.btn, .btn-label, .modal .modal-content .modal-body .option .row-options label, .modal .modal-content .modal-body .option .row-options button, .main-grid .player-area .btn-change-name, .boot-options button, .btn-outline-lime {
-  padding: 0.75rem 2rem;
-  border-radius: 0.25rem;
-  color: #fff;
-  cursor: pointer;
+.btn-label, .modal label, .modal button {
+  border: 1px solid orange;
+  padding: 0.5rem 1.5rem;
+}
+.btn-label:hover, .modal label:hover, .modal button:hover {
+  background-color: #d6a955;
+}
+.btn-label.selected, .modal label.selected, .modal button.selected {
+  outline: 3px solid orange;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.btn-label.disabled, .modal label.disabled, .modal button.disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 .d-none {
   display: none !important;
+}
+
+.mh-0 {
+  max-height: 0;
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+
+.bd-0 {
+  border: 0 !important;
+}
+
+.flex-center, .ttc-grid-container, .choices, #modal-game-options .submit-options, #modal-game-options .difficulty-options, #modal-game-options .game-type-options, #modal-game-options .grid-size-options, .loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading {
+  position: absolute;
+  top: -5%;
+  left: -5%;
+  width: 110%;
+  height: 110%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.spinner {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 5px solid #f8efef;
+  border-top-color: #0d6efd;
+  animation: spin 1s linear 0s infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.modal {
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  overflow: auto;
+}
+.modal input[type=radio], .modal input[type=checkbox] {
+  display: none;
+}
+
+.modal-content {
+  margin-top: 3rem;
+}
+
+.modal-header {
+  padding: 1rem 0;
+  text-align: center;
+  background-image: url(../img/blue.png);
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.modal-body {
+  background-image: url(../img/wood.png);
+  border-radius: 0 0 0.5rem 0.5rem;
+  padding: 1rem 2rem;
+  font-size: 1.75rem;
+}
+
+.modal-spacer {
+  height: 5rem;
+  margin-bottom: -5rem;
+}
+
+.max-height-transition, .column-container .name-input-container, .difficulty-option {
+  transition: max-height 0.15s linear;
+}
+
+.choices, #modal-game-options .submit-options, #modal-game-options .difficulty-options, #modal-game-options .game-type-options, #modal-game-options .grid-size-options {
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.options-with-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#modal-game-options .submit-options {
+  border-bottom: 0;
 }
 
 @font-face {
@@ -78,15 +194,16 @@ h2 {
 }
 .ttc-grid {
   display: grid;
+  position: relative;
 }
-.ttc-grid > div {
+.ttc-grid > .row {
   display: grid;
   border-bottom: 3px solid #fff;
 }
-.ttc-grid > div:last-child {
+.ttc-grid > .row:last-child {
   border-bottom: none;
 }
-.ttc-grid > div > .ttc-cell {
+.ttc-grid > .row > .ttc-cell {
   user-select: none;
   border-right: 3px solid #fff;
   display: flex;
@@ -94,10 +211,10 @@ h2 {
   align-items: center;
   font-size: 3rem;
 }
-.ttc-grid > div > .ttc-cell:last-child {
+.ttc-grid > .row > .ttc-cell:last-child {
   border-right: none;
 }
-.ttc-grid > div > .ttc-cell:hover {
+.ttc-grid > .row > .ttc-cell:hover {
   background-color: rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
@@ -105,9 +222,7 @@ h2 {
 .ttc-grid-container {
   height: 350px;
   max-width: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
 }
 
 .small-cell {
@@ -115,7 +230,7 @@ h2 {
   min-height: 65px;
 }
 
-.large-cell, .ttc-grid > div > .ttc-cell {
+.large-cell, .ttc-grid > .row > .ttc-cell {
   width: 75px;
   height: 75px;
 }
@@ -125,7 +240,6 @@ h2 {
   justify-content: center;
 }
 .boot-options button {
-  background-color: transparent;
   border: 1px solid lime;
 }
 .boot-options button:hover {
@@ -164,7 +278,6 @@ h2 {
   overflow: hidden;
 }
 .main-grid .player-area .btn-change-name {
-  background-color: transparent;
   border: 1px solid lime;
 }
 .main-grid .player-area .btn-change-name:hover {
@@ -218,60 +331,48 @@ h2 {
   visibility: hidden;
 }
 
-.modal {
-  position: fixed;
-  z-index: 999;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  backdrop-filter: blur(10px);
-}
-.modal .modal-content {
-  margin-top: 3rem;
-}
-.modal .modal-content .modal-header {
-  padding: 1rem 0;
-  text-align: center;
-  background-image: url(../img/blue.png);
-  border-radius: 0.5rem 0.5rem 0 0;
-}
-.modal .modal-content .modal-body {
-  background-image: url(../img/wood.png);
-  border-radius: 0 0 0.5rem 0.5rem;
-  padding: 1rem 2rem;
-  font-size: 1.75rem;
-}
-.modal .modal-content .modal-body .option {
+.option {
   padding: 1rem 0;
   border-bottom: 1px solid #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  justify-items: center;
+  align-items: start;
   gap: 3rem;
+  overflow: hidden;
 }
-.modal .modal-content .modal-body .option:last-child {
+.option:last-child {
   border-bottom: none;
   padding-bottom: 0;
 }
-.modal .modal-content .modal-body .option .row-options {
+
+.info-container {
   display: flex;
-  gap: 1rem;
 }
-.modal .modal-content .modal-body .option .row-options input[type=radio] {
-  display: none;
+.info-container .info {
+  width: 0;
+  flex-grow: 1;
+  font-size: 1rem;
+  text-align: center;
+  line-height: 1.5;
 }
-.modal .modal-content .modal-body .option .row-options input[type=checkbox] {
-  display: none;
+.info-container .info .size-info {
+  color: orange;
 }
-.modal .modal-content .modal-body .option.column-option {
+
+.column-option {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
 }
-.modal .modal-content .modal-body .option.submit {
-  display: flex;
-  justify-content: center;
+
+.grid-size {
+  padding-right: 0.5rem;
+}
+
+.difficulty-option {
+  transition-property: all;
 }
 
 .column-container {
@@ -279,23 +380,11 @@ h2 {
   flex-direction: column;
   width: 100%;
   gap: 1.5rem;
+  overflow: hidden;
 }
 .column-container .name-input-container {
   display: flex;
   justify-content: space-between;
-}
-
-.btn-label, .modal .modal-content .modal-body .option .row-options label, .modal .modal-content .modal-body .option .row-options button {
-  background-color: transparent;
-  border: 1px solid orange;
-  padding: 0.5rem 1.5rem;
-}
-.btn-label:hover, .modal .modal-content .modal-body .option .row-options label:hover, .modal .modal-content .modal-body .option .row-options button:hover {
-  background-color: #d6a955;
-}
-.btn-label.selected, .modal .modal-content .modal-body .option .row-options label.selected, .modal .modal-content .modal-body .option .row-options button.selected {
-  outline: 3px solid orange;
-  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /*# sourceMappingURL=styles.css.map */
